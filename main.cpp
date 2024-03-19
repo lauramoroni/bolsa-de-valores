@@ -6,9 +6,9 @@
 using namespace std;
 
 int main() {
-	// CARTEIRA DE AÇÕES
-	// vetor de caracteres referente aos títulos para serem chamado na função show_color()
-	char text_titulo[][80] = { "Carteira de Ações\n", "Quantidade de empresas: [ ]\b\b","Transações Realizadas\n\n", "Resumo da Carteira\n\n", "Rentabilidade da Carteira\n", "Aporte anual R$[    ]\b\b\b\b\b", "Rendimento anual estimado [  ]%\b\b\b\b", "Rentabilidade da Carteira" };
+	// CARTEIRA DE AÃ‡Ã•ES
+	// vetor de caracteres referente aos tÃ­tulos para serem chamado na funÃ§Ã£o show_color()
+	char text_titulo[][80] = { "Carteira de AÃ§Ãµes\n", "Quantidade de empresas: [ ]\b\b","TransaÃ§Ãµes Realizadas\n\n", "Resumo da Carteira\n\n", "Rentabilidade da Carteira\n", "Aporte anual R$[    ]\b\b\b\b\b", "Rendimento anual estimado [  ]%\b\b\b\b", "Rentabilidade da Carteira" };
 
 	show_color(text_titulo[0], white, cyan);
 
@@ -25,18 +25,18 @@ int main() {
 
 	gerar_linhas(linha, 40, cyan, black);
 
-	// vetor dinâmico para guardar os dados
+	// vetor dinÃ¢mico para guardar os dados
 	empresa* vetor_empresa = new empresa[num_empresas];
 
-	// laço de repetição para ler os dados de cada empresa 
+	// laÃ§o de repetiÃ§Ã£o para ler os dados de cada empresa 
 	for (int i = 0; i < num_empresas; i++)
 	{
-		// vetor de caracteres para serem parâmetros da função show_color()
-		char text_empresa[3][15] = { "Empresa: ", "Ticker: ", "Transações: " };
+		// vetor de caracteres para serem parÃ¢metros da funÃ§Ã£o show_color()
+		char text_empresa[3][15] = { "Empresa: ", "Ticker: ", "TransaÃ§Ãµes: " };
 
 		show_color(text_empresa[0], blue, black);
 		cin.ignore();
-		cin.getline(vetor_empresa[i].nome, 50); // permite entrada com espaços
+		cin.getline(vetor_empresa[i].nome, 50); // permite entrada com espaÃ§os
 
 		show_color(text_empresa[1], blue, black);
 		cin >> vetor_empresa[i].codigo;
@@ -50,11 +50,11 @@ int main() {
 	system("cls");
 
 
-	// TRANSAÇÕES REALIZADAS
+	// TRANSAÃ‡Ã•ES REALIZADAS
 
 	show_color(text_titulo[2], white, cyan);
 
-	// laço de repetição para ler todas as empresas
+	// laÃ§o de repetiÃ§Ã£o para ler todas as empresas
 	for (int i = 0; i < num_empresas; i++) {
 
 		// nome da empresa
@@ -67,23 +67,23 @@ int main() {
 
 		vetor_empresa[i].transacoes = new transacao[vetor_empresa[i].num_transacoes];
 
-		// laço de repetição para ler as transações de cada empresa
+		// laÃ§o de repetiÃ§Ã£o para ler as transaÃ§Ãµes de cada empresa
 		for (int j = 0; j < vetor_empresa[i].num_transacoes; j++)
 		{
-			// cria um vetor dinâmico para cada empresa
+			// cria um vetor dinÃ¢mico para cada empresa
 
 
-			// vetor de caracteres para serem parâmetros da função show_color()
-			char text_transacao[2][15] = { "Quantidade: ", "Preço: " };
+			// vetor de caracteres para serem parÃ¢metros da funÃ§Ã£o show_color()
+			char text_transacao[2][15] = { "Quantidade: ", "PreÃ§o: " };
 
-			// atribui os valores de data para o vetor dinâmico das transações da empresa
-			vetor_empresa[i].transacoes[j].data = read_date(); // lê a data
+			// atribui os valores de data para o vetor dinÃ¢mico das transaÃ§Ãµes da empresa
+			vetor_empresa[i].transacoes[j].data = read_date(); // lÃª a data
 
 			show_color(text_transacao[0], blue, black);
-			cin >> vetor_empresa[i].transacoes[j].quantidade; // quantidade de ações
+			cin >> vetor_empresa[i].transacoes[j].quantidade; // quantidade de aÃ§Ãµes
 
 			show_color(text_transacao[1], blue, black);
-			cin >> vetor_empresa[i].transacoes[j].preco; // preço de cada ação
+			cin >> vetor_empresa[i].transacoes[j].preco; // preÃ§o de cada aÃ§Ã£o
 
 			cout << endl;
 
@@ -100,7 +100,7 @@ int main() {
 	alinhamento_left(text_titulo[3], white, cyan, 60);
 	gerar_linhas(linha, 80, cyan, black);
 
-	char text_resumo[5][20] = { " Empresa ", " Ticker ", " Qtd. ", " Preço Médio ", " Investido " };
+	char text_resumo[5][20] = { " Empresa ", " Ticker ", " Qtd. ", " PreÃ§o MÃ©dio ", " Investido " };
 
 	alinhamento_left(text_resumo[0], white, cyan, 12);
 	alinhamento_right(text_resumo[1], white, cyan, 12);
@@ -131,42 +131,56 @@ int main() {
 	show_color(text_titulo[5], blue, black);
 	cin >> aporte_anual;
 
-	int rendimento_anual;
+	float rendimento_anual;
 	show_color(text_titulo[6], blue, black);
 	cin >> rendimento_anual;
+	rendimento_anual /= 100;
 
 	cout << "\n";
 
-	// título
+	// tÃ­tulo
 	show_color(text_titulo[4], white, cyan);
 	gerar_linhas(linha, 80, cyan, black);
 
-	char text_rentabilidade[5][20] = { " Ano  ", " Investido  ", " Rendimento  ", " Acumulado  ", " Gráfico " };
+	char text_rentabilidade[5][30] = { " Ano  ", " Investido          ", " Rendimento          ", " Acumulado          ", " GrÃ¡fico " };
 
 	alinhamento_left(text_rentabilidade[0], white, cyan, 5);
-	alinhamento_left(text_rentabilidade[1], white, cyan, 12);
-	alinhamento_left(text_rentabilidade[2], white, cyan, 12);
+	alinhamento_left(text_rentabilidade[1], white, cyan, 18);
+	alinhamento_left(text_rentabilidade[2], white, cyan, 25);
 	alinhamento_left(text_rentabilidade[3], white, cyan, 12);
 
 	float investido[21] = { total_investido };
+	float acumulado[21] = { total_investido };
+	float rendimento[21] = { 0 };
 
 	cout << "\n";
-	// Exibe o primeiro valor da rentabilidade
-	alinhamento_left_int(0, white, cyan, 5); cout << " ";
-	alinhamento_left_float(total_investido, white, black, 5);
 
+	// Exibe os primeiros valores da rentabilidade
+	alinhamento_left_int(0, white, cyan, 5); cout << "   ";
+	alinhamento_left_float(investido[0], white, black, 10); cout << "\t";// primeiro valor investido
+
+	alinhamento_right_float(rendimento[0], white, black, 15); cout << "\t\t";// primeiro valor de rendimento
+
+	alinhamento_right_float(acumulado[0], white, black, 15);// primeiro valor acumulado
+		
 	for (int i = 1; i <= 20; i++)
 	{
-		// Adiciona ao vetor de índice i o elemento anterior + o aporte
-		investido[i] = investido[i - 1] + aporte_anual;
 		cout << "\n";
-		alinhamento_left_int(i, white, cyan, 5); cout << " ";
-		alinhamento_left_float(investido[i], white, black, 10);
+		
+		// Adiciona ao vetor de Ã­ndice i o elemento anterior + o aporte
+		investido[i] = investido[i - 1] + aporte_anual;
+		alinhamento_left_int(i, white, cyan, 5); cout << "   ";
+		alinhamento_left_float(investido[i], white, black, 15); cout << " "; // total do investimento acrescido do aporte anual
 
-		//float acumulado[21] =
+		rendimento[i] = rendimento_anual * (acumulado[i - 1] + aporte_anual);
+		alinhamento_right_float(rendimento[i], white, black, 15); cout << " ";
+
+		acumulado[i] = acumulado[i - 1] + aporte_anual + rendimento[i]; // acumulado do ano anterior mais o aporte anual e o rendimento obtido 
+		alinhamento_right_float(acumulado[i], white, black, 15); cout << "\t";
+
 	}
 
-	// Deleta cada vetor dinâmico criado
+	// Deleta cada vetor dinÃ¢mico criado
 			for (int i = 0; i < num_empresas; i++)
 			{
 				delete[] vetor_empresa;
